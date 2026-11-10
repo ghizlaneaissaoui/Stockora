@@ -1,4 +1,3 @@
-
 package stockora;
 
 public class Ingredient {

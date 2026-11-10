@@ -18,5 +18,11 @@ public class Main {
     
         bread.addStock(-5);
         System.out.println(bread.getStock());    
+    
+        Product burger = new Product("Classic Burger", 8.50);
+
+        System.out.println(burger.getName());
+        System.out.println(burger.getPrice());    
+    
     }
 }
