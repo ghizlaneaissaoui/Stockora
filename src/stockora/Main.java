@@ -12,5 +12,11 @@ public class Main {
 
         bread.addStock(5);
         System.out.println(bread.getStock());
+
+        bread.removeStock(100);
+        System.out.println(bread.getStock());
+    
+        bread.addStock(-5);
+        System.out.println(bread.getStock());    
     }
 }
