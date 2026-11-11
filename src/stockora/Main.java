@@ -24,5 +24,8 @@ public class Main {
         System.out.println(burger.getName());
         System.out.println(burger.getPrice());    
     
+
+
+        
     }
 }
