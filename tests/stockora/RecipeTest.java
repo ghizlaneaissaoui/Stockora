@@ -6,14 +6,23 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RecipeTest {
 
     @Test
-    void testRecipeCreation() {
-        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+    void testAddIngredients() {
         Product burger = new Product("Classic Burger", 8.50);
 
-        Recipe recipe = new Recipe(burger, bread, 1);
+        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+        Ingredient meat = new Ingredient("Meat", "piece", 30, 5);
+        Ingredient cheese = new Ingredient("Cheese", "slice", 40, 10);
+
+        Recipe recipe = new Recipe(burger);
+
+        recipe.addIngredient(bread, 1);
+        recipe.addIngredient(meat, 1);
+        recipe.addIngredient(cheese, 2);
 
         assertEquals(burger, recipe.getProduct());
-        assertEquals(bread, recipe.getIngredient());
-        assertEquals(1, recipe.getQuantity());
+        assertEquals(3, recipe.getIngredients().size());
+
+        assertEquals(bread, recipe.getIngredients().get(0).getIngredient());
+        assertEquals(2, recipe.getIngredients().get(2).getQuantity());
     }
 }
