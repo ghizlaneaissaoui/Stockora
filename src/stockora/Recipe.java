@@ -1,26 +1,28 @@
+
 package stockora;
+
+import java.util.ArrayList;
 
 public class Recipe {
 
     private Product product;
-    private Ingredient ingredient;
-    private double quantity;
+    private ArrayList<RecipeIngredient> ingredients;
 
-    public Recipe(Product product, Ingredient ingredient, double quantity) {
+    public Recipe(Product product) {
         this.product = product;
-        this.ingredient = ingredient;
-        this.quantity = quantity;
+        this.ingredients = new ArrayList<>();
+    }
+
+    public void addIngredient(Ingredient ingredient, double quantity) {
+        RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient, quantity);
+        ingredients.add(recipeIngredient);
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public double getQuantity() {
-        return quantity;
+    public ArrayList<RecipeIngredient> getIngredients() {
+        return ingredients;
     }
 }
