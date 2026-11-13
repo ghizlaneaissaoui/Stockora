@@ -18,6 +18,16 @@ public class Recipe {
         ingredients.add(recipeIngredient);
     }
 
+    public boolean canBePrepared() {
+        for (RecipeIngredient item : ingredients) {
+            if (item.getIngredient().getStock() < item.getQuantity()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public Product getProduct() {
         return product;
     }
