@@ -35,4 +35,16 @@ public class Recipe {
     public ArrayList<RecipeIngredient> getIngredients() {
         return ingredients;
     }
+
+    public boolean prepare() {
+        if (!canBePrepared()) {
+            return false;
+        }
+
+        for (RecipeIngredient item : ingredients) {
+            item.getIngredient().removeStock(item.getQuantity());
+        }
+
+        return true;
+    }
 }

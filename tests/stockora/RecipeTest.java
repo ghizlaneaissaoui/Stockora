@@ -27,34 +27,75 @@ public class RecipeTest {
     }
 
     @Test
-void testRecipeCanBePrepared() {
-    Product burger = new Product("Classic Burger", 8.50);
+    void testRecipeCanBePrepared() {
+        Product burger = new Product("Classic Burger", 8.50);
 
-    Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
-    Ingredient meat = new Ingredient("Meat", "piece", 30, 5);
-    Ingredient cheese = new Ingredient("Cheese", "slice", 40, 10);
+        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+        Ingredient meat = new Ingredient("Meat", "piece", 30, 5);
+        Ingredient cheese = new Ingredient("Cheese", "slice", 40, 10);
 
-    Recipe recipe = new Recipe(burger);
+        Recipe recipe = new Recipe(burger);
 
-    recipe.addIngredient(bread, 1);
-    recipe.addIngredient(meat, 1);
-    recipe.addIngredient(cheese, 2);
+        recipe.addIngredient(bread, 1);
+        recipe.addIngredient(meat, 1);
+        recipe.addIngredient(cheese, 2);
 
-    assertTrue(recipe.canBePrepared());
-}
-
-@Test
-void testRecipeCannotBePrepared() {
-    Product burger = new Product("Classic Burger", 8.50);
-
-    Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
-    Ingredient meat = new Ingredient("Meat", "piece", 0, 5);
-
-    Recipe recipe = new Recipe(burger);
-
-    recipe.addIngredient(bread, 1);
-    recipe.addIngredient(meat, 1);
-
-    assertFalse(recipe.canBePrepared());
+        assertTrue(recipe.canBePrepared());
     }
+
+    @Test
+    void testRecipeCannotBePrepared() {
+        Product burger = new Product("Classic Burger", 8.50);
+
+        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+        Ingredient meat = new Ingredient("Meat", "piece", 0, 5);
+
+        Recipe recipe = new Recipe(burger);
+
+        recipe.addIngredient(bread, 1);
+        recipe.addIngredient(meat, 1);
+
+        assertFalse(recipe.canBePrepared());
+        }
+
+
+    @Test
+    void testPrepareRecipe() {
+        Product burger = new Product("Classic Burger", 8.50);
+
+        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+        Ingredient meat = new Ingredient("Meat", "piece", 30, 5);
+        Ingredient cheese = new Ingredient("Cheese", "slice", 40, 10);
+
+        Recipe recipe = new Recipe(burger);
+
+        recipe.addIngredient(bread, 1);
+        recipe.addIngredient(meat, 1);
+        recipe.addIngredient(cheese, 2);
+
+        assertTrue(recipe.prepare());
+
+        assertEquals(49, bread.getStock());
+        assertEquals(29, meat.getStock());
+        assertEquals(38, cheese.getStock());
+    }
+
+    @Test
+    void testPrepareRecipeWithInsufficientStock() {
+        Product burger = new Product("Classic Burger", 8.50);
+
+        Ingredient bread = new Ingredient("Bread", "piece", 50, 10);
+        Ingredient meat = new Ingredient("Meat", "piece", 0, 5);
+
+        Recipe recipe = new Recipe(burger);
+
+        recipe.addIngredient(bread, 1);
+        recipe.addIngredient(meat, 1);
+
+        assertFalse(recipe.prepare());
+
+        assertEquals(50, bread.getStock());
+        assertEquals(0, meat.getStock());
+    }
+
 }
